@@ -53,5 +53,7 @@ func GetMlNews(client *db.PrismaClient, today string) []types.MachineLEarningNew
 	returnData = append(returnData, d)
   }
 
+
+
   return returnData
 }

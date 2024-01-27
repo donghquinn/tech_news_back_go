@@ -6,7 +6,7 @@ import (
 )
 
 func Handler(router *gin.Engine) {
-	hacker :=router.Group("/hacker")
+	hacker := router.Group("/hacker")
 	{
 		hacker.POST("/news", controllers.HackerNewsController)
 	}
