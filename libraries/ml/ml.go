@@ -1,4 +1,4 @@
-package hacker
+package ml
 
 import (
 	"context"
@@ -9,23 +9,24 @@ import (
 	"github.com/dongquinn/tech_news_back_go/types"
 )
 
-func GetHackerNews(client *db.PrismaClient, today string) []types.HackerNewsResponse {
+func GetMlNews(client *db.PrismaClient, today string) []types.MachineLEarningNewsResponse {
 	context := context.Background()
 
-		// Layout for parsing
 	layout := "2006-01-02 15:04:05.000"
-	dateTime, timeErr := time.Parse(layout, today)
+	dateTime, dateErr := time.Parse(layout, today)
 
-	if timeErr != nil {
-		log.Fatalln(timeErr)
+	if dateErr != nil {
+		log.Fatalln(dateErr)
 	}
+
 	year, month, day := dateTime.Year(), dateTime.Month(), dateTime.Day()
+
 	startDate := time.Date(year, month, day, 0 ,0, 0, 0, time.UTC)
 	endDate := time.Date(year, month, day, 23, 59, 59, 59, time.UTC)
-	
-	result, queryErr  := client.Hackers.FindMany(
-		db.Hackers.Founded.Gte(startDate),
-		db.Hackers.Founded.Lte(endDate),
+
+	result, queryErr  := client.MachineNews.FindMany(
+		db.MachineNews.Founded.Gte(startDate),
+		db.MachineNews.Founded.Lte(endDate),
 	).Exec(context)
 
 	defer func() {
@@ -38,13 +39,13 @@ func GetHackerNews(client *db.PrismaClient, today string) []types.HackerNewsResp
 	log.Fatalln(queryErr)
   }
 
-//   log.Println(result)
-  returnData := make([]types.HackerNewsResponse, 0)
+  returnData := make([]types.MachineLEarningNewsResponse, 0)
 
   for _, data := range result {
-	d := types.HackerNewsResponse {
+	d := types.MachineLEarningNewsResponse {
 		Uuid: data.UUID,
-		Post: data.Post,
+		Title: data.Title,
+		Category: data.Category,
 		Link: data.Link,
 		Founded: data.Founded,
 	}

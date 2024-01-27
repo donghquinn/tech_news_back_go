@@ -15,4 +15,9 @@ func Handler(router *gin.Engine) {
 	{
 		geek.POST("/news", controllers.GeekNewsController)
 	}
+
+	ml := router.Group("/ml")
+	{
+		ml.POST("/latest", controllers.MachineLearningController)
+	}
 }
