@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: news_back
+    container_name: news_miner
     expose: 
       - ${APP_PORT}
     networks:
