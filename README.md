@@ -2,6 +2,10 @@
 
 - This Code is Golang ported program of this [program](https://github.com/donghquinn/tech_news_back)
 
+- I converted my original nest.js based codes to golang because of response time.
+
+- Furthermore it seems lighter than nestjs codes to me.
+
 ## Dependencies
 
 - go-gin
