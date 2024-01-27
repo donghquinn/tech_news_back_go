@@ -36,12 +36,18 @@ func GetDailyGeekNews(client *db.PrismaClient, today string) []types.GeekNewsRes
       panic(err)
     }
   }()
-  
-	returnArray := make([]types.GeekNewsResponse, len(result))
+
+	returnArray := make([]types.GeekNewsResponse, 0)
 	log.Println(result)
 
 	for _, data := range result {
-		dd := types.GeekNewsResponse{Uuid: data.UUID, Post: data.Post, OriginalLink: data.Link, DescLink: data.DescLink, Founded: data.Founded}
+		dd := types.GeekNewsResponse {
+			Uuid: data.UUID,
+			Post: data.Post, 
+			OriginalLink: data.Link, 
+			DescLink: data.DescLink, 
+			Founded: data.Founded,
+		}
 		returnArray = append(returnArray, dd)
 	}
 
