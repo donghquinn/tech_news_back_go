@@ -7,8 +7,8 @@ type HackerNewsRequest struct {
 }
 
 type HackerNewsResponse struct {
-	Uuid string `json:"uuid" xml:"uuid" binding:"required"`
-	Post string `json:"post" xml:"post" binding:"required"`
-	Link string `json:"link" xml:"link" binding:"required"`
+	Uuid string `json:"uuid" xml:"uuid" binding:"required,min=1"`
+	Post string `json:"post" xml:"post" binding:"required,min=1"`
+	Link string `json:"link" xml:"link" binding:"required,min=1"`
 	Founded time.Time `json:"founded" xml:"founded" binding:"required"`
 }
