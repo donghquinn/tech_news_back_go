@@ -15,13 +15,13 @@ RUN go mod download
 
 RUN go run github.com/steebchen/prisma-client-go generate
 
-RUN go build -o main .
+RUN go build .
 
 
 FROM builder as release
 
 WORKDIR /home/node
 
-COPY --from=builder ./main ./main
+COPY --from=builder ./main /home/node/main
 
-CMD [ "main" ]
+CMD [ "./main" ]
