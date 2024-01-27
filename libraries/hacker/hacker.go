@@ -36,16 +36,18 @@ func GetHackerNews(client *db.PrismaClient, today string) []types.HackerNewsResp
 	log.Fatalln(queryErr)
   }
 
-  log.Println(result)
+//   log.Println(result)
   returnData := make([]types.HackerNewsResponse, len(result))
 
   for _, data := range result {
-	d := types.HackerNewsResponse{
+	d := types.HackerNewsResponse {
 		Uuid: data.UUID,
 		Post: data.Post,
 		Link: data.Link,
 		Founded: data.Founded,
 	}
+	log.Printf("Hacker Data: %s\n", d)
+
 	returnData = append(returnData, d)
   }
 

@@ -27,7 +27,6 @@ func HackerNewsController(ctx *gin.Context){
 	}
 
 	today := request.Today
-	log.Printf("Today: %s\n", today)
 
 	result := hacker.GetHackerNews(client, today)
 
