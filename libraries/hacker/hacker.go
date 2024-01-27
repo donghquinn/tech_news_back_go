@@ -12,7 +12,9 @@ import (
 func GetHackerNews(client *db.PrismaClient, today string) []types.HackerNewsResponse {
 	context := context.Background()
 
-	dateTime, timeErr := time.Parse(time.RFC3339, today)
+		// Layout for parsing
+	layout := "2006-01-02 15:04:05.000"
+	dateTime, timeErr := time.Parse(layout, today)
 
 	if timeErr != nil {
 		log.Fatalln(timeErr)
