@@ -21,9 +21,8 @@ func GeekNewsController(ctx *gin.Context) {
 	}
 
 	today := request.Today
-	log.Printf("Today: %s\n", today)
-	client, dbErr := prisma.PrismaClient()
 
+	client, dbErr := prisma.PrismaClient()
 
 	if dbErr != nil {
 		log.Fatalln(dbErr)

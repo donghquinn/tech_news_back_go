@@ -1,0 +1,15 @@
+---
+version: "3.7"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: news_miner
+    expose: 
+      - ${APP_PORT}
+    networks:
+      - proxy
+networks:
+  proxy:
+   external: true

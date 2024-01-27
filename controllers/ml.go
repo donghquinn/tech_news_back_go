@@ -5,20 +5,21 @@ import (
 	"net/http"
 
 	"github.com/dongquinn/tech_news_back_go/dto"
-	"github.com/dongquinn/tech_news_back_go/libraries/hacker"
+	"github.com/dongquinn/tech_news_back_go/libraries/ml"
 	"github.com/dongquinn/tech_news_back_go/libraries/prisma"
 	"github.com/dongquinn/tech_news_back_go/types"
 	"github.com/gin-gonic/gin"
 )
 
-func HackerNewsController(ctx *gin.Context){
-	request := types.HackerNewsRequest{}
+func MachineLearningController(ctx *gin.Context) {
+	request := types.MachineLearningNewsRequest{}
 
 	if reqErr := ctx.ShouldBind(&request); reqErr != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Required value is not included"})
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Required Value is not included. Please Try Again"})
 
 		return
 	}
+	today := request.Today
 
 	client, prismaErr := prisma.PrismaClient()
 
@@ -26,9 +27,7 @@ func HackerNewsController(ctx *gin.Context){
 		log.Fatalln(prismaErr)
 	}
 
-	today := request.Today
-
-	result := hacker.GetHackerNews(client, today)
+	result := ml.GetMlNews(client, today)
 
 	dto.SetResponse(200, result, ctx)
 }

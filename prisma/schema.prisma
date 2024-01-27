@@ -10,19 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Client{
-  uuid String @id @default(uuid())
-  email String
-  password String
-  password_token String
-  userName String
-  isLogin Int @default(0)
-  accessToken String?
-  refreshToken String?
-  hackers_liked Hackers[]
-  hada_liked Hada[]
-  ml_liked MachineNews[]
-}
+// model Client{
+//   uuid String @id @default(uuid())
+//   email String
+//   password String
+//   password_token String
+//   userName String
+//   isLogin Int @default(0)
+//   accessToken String?
+//   refreshToken String?
+//   hackers_liked Hackers[]
+//   hada_liked Hada[]
+//   ml_liked MachineNews[]
+// }
 
 model Hackers {
   uuid    String   @id @default(uuid())
@@ -30,8 +30,8 @@ model Hackers {
   post    String
   link    String
   liked   Int   @default(0)
-  client_id String[]
-  liked_client Client @relation(fields: [client_id], references: [uuid])
+  // client_id String[]
+  // liked_client Client @relation(fields: [client_id], references: [uuid])
   founded DateTime
 }
 
@@ -43,8 +43,8 @@ model Hada {
   descLink String
   link    String
   liked   Int   @default(0)
-  client_id String[]
-  liked_client Client @relation(fields: [client_id], references: [uuid])
+  // client_id String[]
+  // liked_client Client @relation(fields: [client_id], references: [uuid])
   founded DateTime
 }
 
@@ -75,8 +75,8 @@ model MachineNews {
   title    String
   link     String
   liked    Int   @default(0)
-  client_id String[]
-  liked_client Client @relation(fields: [client_id], references: [uuid])
+  // client_id String[]
+  // liked_client Client @relation(fields: [client_id], references: [uuid])
   founded  DateTime
 }
 
