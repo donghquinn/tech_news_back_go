@@ -5,5 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: news_back
     expose: 
       - ${APP_PORT}
+    networks:
+      - proxy
+networks:
+  proxy:
+   external: true

@@ -7,21 +7,19 @@ ENV GO111MODULE=on \
 
 FROM base as builder
 
-WORKDIR /home/app
+WORKDIR /app
 
 COPY . .
 
-RUN go mod download
-
 RUN go run github.com/steebchen/prisma-client-go generate
 
-RUN go build .
+RUN go build -o scraper .
 
 
 FROM builder as release
 
 WORKDIR /home/node
 
-COPY --from=builder ./main /home/node/main
+COPY --from=builder /app/scraper ./scraper
 
-CMD [ "./main" ]
+CMD [ "./scraper" ]
