@@ -8,6 +8,8 @@ services:
     container_name: news_miner
     expose: 
       - 5500
+    env_file:
+      - .env
     networks:
       - proxy
 networks:
