@@ -11,7 +11,7 @@ import (
 
 func GetDailyGeekNews(client *db.PrismaClient, today string) []types.GeekNewsResponse {
 	ctx := context.Background()
-	returnArray := make([]types.GeekNewsResponse, 0)
+
 
 	todayStart, timeErr := time.Parse(time.RFC3339,today)
 
@@ -36,7 +36,8 @@ func GetDailyGeekNews(client *db.PrismaClient, today string) []types.GeekNewsRes
       panic(err)
     }
   }()
-
+  
+	returnArray := make([]types.GeekNewsResponse, len(result))
 	log.Println(result)
 
 	for _, data := range result {
