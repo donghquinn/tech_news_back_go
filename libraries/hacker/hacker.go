@@ -19,6 +19,7 @@ func GetHackerNews(client *db.PrismaClient, today string) []types.HackerNewsResp
 	if timeErr != nil {
 		log.Fatalln(timeErr)
 	}
+	
 	year, month, day := dateTime.Year(), dateTime.Month(), dateTime.Day()
 	startDate := time.Date(year, month, day, 0 ,0, 0, 0, time.UTC)
 	endDate := time.Date(year, month, day, 23, 59, 59, 59, time.UTC)

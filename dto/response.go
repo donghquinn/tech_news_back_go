@@ -8,9 +8,13 @@ import (
 )
 
 func SetResponse(resCode int, data any, ctx *gin.Context) {
+	result := types.ResponseResult {
+		Result: data,
+	}
+
 	response := types.ResponseDto{
 		ResCode: resCode,
-		DataRes: data,
+		DataRes: result,
 	}
 
 	ctx.JSON(http.StatusOK, response)

@@ -23,11 +23,12 @@ func main(){
 
 	router.Use(middlewares.GlobalMiddleware())
 	router.Use(middlewares.CorsMiddlewares())
-	
+
 	server := &http.Server{
 		Addr: port,
 		Handler: router,
 	}
+
 
 	log := utilities.Logger()
 

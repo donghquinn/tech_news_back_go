@@ -19,6 +19,7 @@ func MachineLearningController(ctx *gin.Context) {
 
 		return
 	}
+	
 	today := request.Today
 
 	client, prismaErr := prisma.PrismaClient()
