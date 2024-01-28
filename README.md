@@ -34,3 +34,11 @@ go get -u github.com/joho/godotenv
 ```shell
 go run github.com/steebchen/prisma-client-go generate
 ```
+
+## Mod Dependencies
+
+- dpendencies input
+
+```shell
+go mod tidy
+```
