@@ -11,7 +11,7 @@ func Handler(router *gin.Engine) {
 		hacker.POST("/news", controllers.HackerNewsController)
 	}
 
-	geek := router.Group("/hada")
+	geek := router.Group("/geek")
 	{
 		geek.POST("/news", controllers.GeekNewsController)
 	}
