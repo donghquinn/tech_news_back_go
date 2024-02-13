@@ -12,19 +12,20 @@ import (
 func GetDailyGeekNews(client *db.PrismaClient, today string) []types.GeekNewsResponse {
 	ctx := context.Background()
 
-
-	todayStart, timeErr := time.Parse(time.RFC3339,today)
+	layout := "2006-01-02 15:04:05.000"
+	dateTime, timeErr := time.Parse(layout, today)
 
 	if timeErr != nil {
 		log.Fatalln(timeErr)
 	}
 
-	year, month, day := todayStart.Year(),todayStart.Month(), todayStart.Day()
+	year, month, day := dateTime.Year(), dateTime.Month(), dateTime.Day()
+
 	log.Printf("Year: %d, Month: %d, Day: %d", year, month, day)
 
-	result, queryErr := client.Hada.FindMany(
-		db.Hada.Founded.Gte(time.Date(year, month, day, 0,0,0,0,time.UTC)),
-		db.Hada.Founded.Lte(time.Date(year, month, day, 23,59,59,59,time.UTC)),
+	result, queryErr := client.Geek.FindMany(
+		db.Geek.Founded.Gte(time.Date(year, month, day, 0,0,0,0,time.UTC)),
+		db.Geek.Founded.Lte(time.Date(year, month, day, 23,59,59,59,time.UTC)),
 	).Exec(ctx)
 
 	if queryErr != nil {
@@ -48,6 +49,7 @@ func GetDailyGeekNews(client *db.PrismaClient, today string) []types.GeekNewsRes
 			DescLink: data.DescLink, 
 			Founded: data.Founded,
 		}
+
 		returnArray = append(returnArray, dd)
 	}
 
