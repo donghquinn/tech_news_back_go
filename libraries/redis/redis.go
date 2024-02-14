@@ -47,3 +47,15 @@ func GetItem(client *redis.Client, email string) (string, error) {
 
 	return uuid, nil
 }
+
+func DeleteItem(client *redis.Client, email string) error {
+	ctx := context.Background()
+
+	err := client.Del(ctx, email).Err()
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
