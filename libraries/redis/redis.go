@@ -3,6 +3,7 @@ package redis
 import (
 	"context"
 	"os"
+	"time"
 
 	"github.com/dongquinn/tech_news_back_go/types"
 	"github.com/redis/go-redis/v9"
@@ -10,10 +11,12 @@ import (
 
 func RedisClient() *redis.Client {
 	host := os.Getenv("REDIS_HOST")
+	userName := os.Getenv("REDIS_USER")
 	password := os.Getenv("REDIS_PASSWORD")
 
 	client := redis.NewClient(&redis.Options{
 		Addr: host,
+		Username: userName,
 		Password: password,
 	})
 
@@ -27,7 +30,7 @@ func SetItem(client *redis.Client, email string, uuid string) error {
 		Uuid: uuid,
 	}
 
-	err := client.Set(ctx, email, item, 10).Err()
+	err := client.Set(ctx, email, item, 60*10*time.Second).Err()
 
 	if err != nil {
 		return err
