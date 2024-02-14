@@ -15,13 +15,15 @@ services:
   
   backend:
     depends_on:
-      - scrape_redis
+      - redis
     build:
       context: .
       dockerfile: Dockerfile
     container_name: news_miner
-    expose: 
-      - 5500
+    ports:
+      - 5500:5500
+    # expose: 
+    #   - 5500
     env_file:
       - .env
     networks:

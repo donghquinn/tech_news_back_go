@@ -12,7 +12,7 @@ import (
 func RedisClient() *redis.Client {
 	host := os.Getenv("REDIS_HOST")
 	userName := os.Getenv("REDIS_USER")
-	password := os.Getenv("REDIS_PASSWORD")
+	password := os.Getenv("REDIS_PASS")
 
 	client := redis.NewClient(&redis.Options{
 		Addr: host,

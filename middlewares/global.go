@@ -19,7 +19,7 @@ func GlobalMiddleware() gin.HandlerFunc {
 
 		headerKey := ctx.Request.Header.Get("key")
 
-		log.Printf("Check Header Key: %s.\nStart Validate with Secret Key", headerKey)
+		log.Printf("Check Header Key: %s\nServer Key: %s\nStart Validate with Secret Key", headerKey, secretKey)
 
 		// Header Key Matching
 		if headerKey != secretKey {
@@ -29,10 +29,5 @@ func GlobalMiddleware() gin.HandlerFunc {
 		}
 
 		ctx.Next()
-
-		latency := time.Since(start)
-
-		log.Printf("Latency: %s", latency.String())
-		ctx.Writer.Status()
 	}
 }

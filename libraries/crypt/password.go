@@ -7,10 +7,11 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
-func EncryptPassword(password string) (encryptedString string) {
+func EncryptPassword(password string) (string, error) {
 	key := os.Getenv("SECRET_KEY")
 	//Since the key is in string, we need to convert decode it to bytes
 	keyBytes, _ := hex.DecodeString(key)
@@ -19,30 +20,33 @@ func EncryptPassword(password string) (encryptedString string) {
 	//Create a new Cipher Block from the key
 	block, err := aes.NewCipher(keyBytes)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
+		return "", err
 	}
 
 	//Create a new GCM - https://en.wikipedia.org/wiki/Galois/Counter_Mode
 	//https://golang.org/pkg/crypto/cipher/#NewGCM
 	aesGCM, err := cipher.NewGCM(block)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
+		return "", err
 	}
 
 	//Create a nonce. Nonce should be from GCM
 	nonce := make([]byte, aesGCM.NonceSize())
 	if _, err = io.ReadFull(rand.Reader, nonce); err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
+		return "", err
 	}
 
 	//Encrypt the data using aesGCM.Seal
 	//Since we don't want to save the nonce somewhere else in this case, we add it as a prefix to the encrypted data. The first nonce argument in Seal is the prefix.
 	ciphertext := aesGCM.Seal(nonce, nonce, plaintext, nil)
 	
-	return fmt.Sprintf("%x", ciphertext)
+	return fmt.Sprintf("%x", ciphertext), nil
 }
 
-func DecryptPassword(encryptedString string, token string) (decryptedString string) {
+func DecryptPassword(encryptedString string, token string) (string, error) {
 	key := os.Getenv("SECRET_KEY")
 	keyBytes, _ := hex.DecodeString(key)
 	tokenBytes, _ := hex.DecodeString(token)
@@ -52,22 +56,25 @@ func DecryptPassword(encryptedString string, token string) (decryptedString stri
 	//Create a new Cipher Block from the key
 	block, err := aes.NewCipher(keyBytes)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
+		return "", err
 	}
 
 	//Create a new GCM
 	aesGCM, err := cipher.NewGCM(block)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
+		return "", err
 	}
-	
+
 	//Decrypt the data
 	plaintext, err := aesGCM.Open(nil, enc, tokenBytes, nil)
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err.Error())
+		return "", err
 	}
 
-	return fmt.Sprintf("%s", plaintext)
+	return fmt.Sprintf("%s", plaintext), nil
 }
 // func CryptoPassword(secretKey string, password string) (string, string) {
 // 	key := os.Getenv("SECRET_KEY")

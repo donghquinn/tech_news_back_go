@@ -14,7 +14,11 @@ import (
 func LoginLibrary(email string, password string) (string, error) {
 	context := context.Background()
 
-	encodedPassword := crypt.EncryptPassword(password)
+	encodedPassword, encodErr := crypt.EncryptPassword(password)
+
+	if encodErr != nil {
+		return "", nil
+	}
 
 	client := redis.RedisClient()
 
@@ -53,7 +57,11 @@ func LoginLibrary(email string, password string) (string, error) {
 }
 
 func comparePassword(rawPassword string, encodedPassword string, token string) bool {
-	decodedPassword := crypt.DecryptPassword(encodedPassword, token)
+	decodedPassword, decryptErr := crypt.DecryptPassword(encodedPassword, token)
+
+	if decryptErr != nil {
+		return false
+	}
 
 	log.Printf("Raw: %s\nDecoded: %s\nEncoded: %s\nToken: %s\n", rawPassword, decodedPassword, encodedPassword, token)
 

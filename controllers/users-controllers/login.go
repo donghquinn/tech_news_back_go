@@ -1,6 +1,7 @@
 package userscontrollers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/dongquinn/tech_news_back_go/dto"
@@ -20,6 +21,8 @@ func UserLoginController(ctx *gin.Context) {
 
 	email := request.Email
 	password := request.Password
+
+	log.Printf("Login Email: %s, Password: %s\n", email, password)
 
 	result, loginErr := users.LoginLibrary(email, password)
 
