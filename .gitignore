@@ -1,4 +1,6 @@
 .DS_Store
 .env
+redis.conf
+redis_data
 
 main

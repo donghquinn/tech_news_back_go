@@ -26,6 +26,12 @@ go get -u github.com/steebchen/prisma-client-go
 go get -u github.com/joho/godotenv
 ```
 
+- redis
+
+```shell
+go get -u github.com/redis/go-redis/v9
+```
+
 ## Prisma
 
 - Data Entities are defined at prisma/schema.prisma

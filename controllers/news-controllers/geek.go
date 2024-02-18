@@ -1,4 +1,4 @@
-package controllers
+package newscontrollers
 
 import (
 	"log"
@@ -21,6 +21,8 @@ func GeekNewsController(ctx *gin.Context) {
 	}
 
 	today := request.Today
+	page := ctx.Query("page")
+	size := ctx.Query("size")
 
 	client, dbErr := prisma.PrismaClient()
 
@@ -28,7 +30,7 @@ func GeekNewsController(ctx *gin.Context) {
 		log.Fatalln(dbErr)
 	}
 
-	result := geek.GetDailyGeekNews(client, today)
+	result := geek.GetDailyGeekNews(client, today, page, size)
 
 	dto.SetResponse(200, result, ctx)
 }
