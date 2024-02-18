@@ -23,14 +23,15 @@ func RedisClient() *redis.Client {
 	return client
 }
 
-func SetItem(client *redis.Client, email string, uuid string) error {
+func SetItem(client *redis.Client, email string, uuid string, minuteDuration int) error {
 	ctx := context.Background()
 
 	item := types.AccountItem{
 		Uuid: uuid,
 	}
 
-	err := client.Set(ctx, email, item, 60*10*time.Second).Err()
+	expireDuration := minuteDuration * 60 * 1000
+	err := client.Set(ctx, email, item, time.Duration(expireDuration)).Err()
 
 	if err != nil {
 		return err

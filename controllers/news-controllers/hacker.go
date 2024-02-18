@@ -28,7 +28,10 @@ func HackerNewsController(ctx *gin.Context){
 
 	today := request.Today
 
-	result := hacker.GetHackerNews(client, today)
+	page := ctx.Query("page")
+	size := ctx.Query("size")
+
+	result := hacker.GetHackerNews(client, today, page, size)
 
 	dto.SetResponse(200, result, ctx)
 }

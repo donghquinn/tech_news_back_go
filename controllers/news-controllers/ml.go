@@ -22,13 +22,16 @@ func MachineLearningController(ctx *gin.Context) {
 	
 	today := request.Today
 
+	page := ctx.Query("page")
+	size := ctx.Query("size")
+
 	client, prismaErr := prisma.PrismaClient()
 
 	if prismaErr != nil {
 		log.Fatalln(prismaErr)
 	}
 
-	result := ml.GetMlNews(client, today)
+	result := ml.GetMlNews(client, today, page, size)
 
 	dto.SetResponse(200, result, ctx)
 }

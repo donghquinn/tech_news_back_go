@@ -44,10 +44,10 @@ func LoginLibrary(email string, password string) (string, error) {
 	isSame := comparePassword(password, encryptedPassword, token)
 
 	if !isSame {
-		return "", errors.New("Given Password is Not Match")
+		return "", errors.New("given password is not match")
 	}
 
-	setErr := redis.SetItem(client, email, uuid)
+	setErr := redis.SetItem(client, email, uuid, 10)
 
 	if setErr != nil {
 		return "", setErr

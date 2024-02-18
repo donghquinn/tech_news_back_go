@@ -3,13 +3,14 @@ package ml
 import (
 	"context"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/dongquinn/tech_news_back_go/prisma/db"
 	"github.com/dongquinn/tech_news_back_go/types"
 )
 
-func GetMlNews(client *db.PrismaClient, today string) []types.MachineLEarningNewsResponse {
+func GetMlNews(client *db.PrismaClient, today string, page string, size string) []types.MachineLEarningNewsResponse {
 	context := context.Background()
 
 	layout := "2006-01-02 15:04:05.000"
@@ -24,10 +25,22 @@ func GetMlNews(client *db.PrismaClient, today string) []types.MachineLEarningNew
 	startDate := time.Date(year, month, day, 0 ,0, 0, 0, time.UTC)
 	endDate := time.Date(year, month, day, 23, 59, 59, 59, time.UTC)
 
+	pageNumber, pagErr := strconv.Atoi(page)
+	if pagErr != nil {
+		log.Fatalln(pagErr) 
+	}
+
+	sizeNumber, sizErr := strconv.Atoi(size)
+
+	if sizErr != nil {
+		log.Fatalln(sizErr)
+	}
+
+	log.Printf("Page: %v, Size: %v", pageNumber, sizeNumber)
 	result, queryErr  := client.MachineNews.FindMany(
 		db.MachineNews.Founded.Gte(startDate),
 		db.MachineNews.Founded.Lte(endDate),
-	).Exec(context)
+	).Take(sizeNumber).Skip((pageNumber - 1) * sizeNumber).Exec(context)
 
 	defer func() {
    	 if err := client.Prisma.Disconnect(); err != nil {

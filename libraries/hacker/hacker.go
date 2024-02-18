@@ -3,13 +3,14 @@ package hacker
 import (
 	"context"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/dongquinn/tech_news_back_go/prisma/db"
 	"github.com/dongquinn/tech_news_back_go/types"
 )
 
-func GetHackerNews(client *db.PrismaClient, today string) []types.HackerNewsResponse {
+func GetHackerNews(client *db.PrismaClient, today string, page string, size string) []types.HackerNewsResponse {
 	context := context.Background()
 
 		// Layout for parsing
@@ -24,10 +25,21 @@ func GetHackerNews(client *db.PrismaClient, today string) []types.HackerNewsResp
 	startDate := time.Date(year, month, day, 0 ,0, 0, 0, time.UTC)
 	endDate := time.Date(year, month, day, 23, 59, 59, 59, time.UTC)
 	
+	pageNumber, pagErr := strconv.Atoi(page)
+	if pagErr != nil {
+		log.Fatalln(pagErr) 
+	}
+
+	sizeNumber, sizErr := strconv.Atoi(size)
+
+	if sizErr != nil {
+		log.Fatalln(sizErr)
+	}
+
 	result, queryErr  := client.Hackers.FindMany(
 		db.Hackers.Founded.Gte(startDate),
 		db.Hackers.Founded.Lte(endDate),
-	).Exec(context)
+	).Take(sizeNumber).Skip((pageNumber - 1) * sizeNumber).Exec(context)
 
 	defer func() {
    	 if err := client.Prisma.Disconnect(); err != nil {
