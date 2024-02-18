@@ -21,14 +21,13 @@ func main(){
 
 	gin.SetMode(mode)
 
-	router.Use(middlewares.GlobalMiddleware())
 	router.Use(middlewares.CorsMiddlewares())
+	router.Use(middlewares.GlobalMiddleware())
 
 	server := &http.Server{
 		Addr: port,
 		Handler: router,
 	}
-
 
 	log := utilities.Logger()
 
