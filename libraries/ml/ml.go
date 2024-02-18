@@ -37,6 +37,7 @@ func GetMlNews(client *db.PrismaClient, today string, page string, size string) 
 	}
 
 	log.Printf("Page: %v, Size: %v", pageNumber, sizeNumber)
+	
 	result, queryErr  := client.MachineNews.FindMany(
 		db.MachineNews.Founded.Gte(startDate),
 		db.MachineNews.Founded.Lte(endDate),
