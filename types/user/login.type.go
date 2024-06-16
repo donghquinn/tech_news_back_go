@@ -11,3 +11,9 @@ type LoginErrorResponse struct {
 	Code string `json:"code"`
 	Message string `json:"message"`
 }
+
+type LoginRedisStruct struct {
+	Name string `json:"name"`
+	Email string `json:"email"`
+	UserId string `json:"userId"`
+}

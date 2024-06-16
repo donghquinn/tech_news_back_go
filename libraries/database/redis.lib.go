@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/donghquinn/chat_back/configs"
-	types "github.com/donghquinn/chat_back/types/user"
+	"github.com/dongquinn/tech_news_back_go/configs"
+	types "github.com/dongquinn/tech_news_back_go/types/user"
 	redis "github.com/redis/go-redis/v9"
 )
 

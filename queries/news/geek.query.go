@@ -1,5 +1,15 @@
 package queries
 
+var GetGeekTodayNewsByDate = `
+	SELECT *
+	FROM Geek
+	WHERE DATE(founded) = $1
+	OFFSET $2
+	LIMIT $3
+	ORDER BY rank DESC
+	`
+
+
 var GetGeekNewsByDate = `
 	SELECT *
 	FROM Geek

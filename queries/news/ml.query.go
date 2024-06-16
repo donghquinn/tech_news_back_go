@@ -1,6 +1,14 @@
 package queries
 
 
+var GetTodayMlByDate =  `
+	SELECT *
+	FROM MachineNews
+	WHERE DATE(founded) = $1
+	OFFSET $2
+	LIMIT $3
+	ORDER BY founded DESC
+	`
 
 var GetMlByDate =  `
 	SELECT *
@@ -11,14 +19,6 @@ var GetMlByDate =  `
 	ORDER BY founded DESC
 	`
 
-var GetTodayMlByDate =  `
-	SELECT *
-	FROM MachineNews
-	WHERE DATE(founded) = $1
-	OFFSET $2
-	LIMIT $3
-	ORDER BY founded DESC
-	`
 
 var LikeMlNews = `
 	INSERT INTO Hacker_Liked
