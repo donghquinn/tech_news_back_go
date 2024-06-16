@@ -23,7 +23,7 @@ func AdminHackerNewsController(response http.ResponseWriter, request *http.Reque
 	parseErr := utilities.ParseBody(request, &requestBody)
 
 	if parseErr != nil {
-		dto.SetHackerErrorResponse(response, false, "01", "Not Valid Request")
+		dto.SetHackerErrorResponse(response, false, "02", "Not Valid Request")
 		return
 	}
 
@@ -33,7 +33,7 @@ func AdminHackerNewsController(response http.ResponseWriter, request *http.Reque
 	newsList, newsErr := news.GetTodayHackerNewsList(page, size)
 
 	if newsErr != nil {
-		dto.SetHackerErrorResponse(response, false, "02", "Query News Error")
+		dto.SetHackerErrorResponse(response, false, "03", "Query News Error")
 		return
 	}
 

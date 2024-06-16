@@ -23,7 +23,7 @@ func AdminMachineLearningController(response http.ResponseWriter, request *http.
 	parseErr := utilities.ParseBody(request, &requestBody)
 
 	if parseErr != nil {
-		dto.SetMlErrorResponse(response, false, "01", "Not Valid Error")
+		dto.SetMlErrorResponse(response, false, "02", "Not Valid Error")
 		return
 	}
 	
@@ -33,7 +33,7 @@ func AdminMachineLearningController(response http.ResponseWriter, request *http.
 	mlNewsList, mlErr := news.GetTodayMlNewsList(page, size)
 
 	if mlErr != nil {
-		dto.SetMlErrorResponse(response, false, "02", "Get ML News Error")
+		dto.SetMlErrorResponse(response, false, "03", "Get ML News Error")
 		return
 	}
 	

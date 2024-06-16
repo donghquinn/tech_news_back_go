@@ -35,5 +35,5 @@ var CreateLikedNews = `
 
 
 var QueriesTransaction = []string{
-	UserExternalUuidFunctions, CreateClient}
+	UserExternalUuidFunctions, CreateClient, CreateLikedNews}
 	//  CreateSession, ChatGen, ImageGen, CreateFile}

@@ -23,7 +23,7 @@ func AdminGeekNewsController(response http.ResponseWriter, request *http.Request
 	parseErr := utilities.ParseBody(request, &requestBody)
 
 	if parseErr != nil {
-		dto.SetGeekErrorResponse(response, false, "01", "Not Valid Request")
+		dto.SetGeekErrorResponse(response, false, "02", "Not Valid Request")
 		return
 	}
 
@@ -34,7 +34,7 @@ func AdminGeekNewsController(response http.ResponseWriter, request *http.Request
 	geekNewsList, geekErr := news.GetTodayGeekNewsList(page, size)
 
 	if geekErr != nil {
-		dto.SetGeekErrorResponse(response, false, "02", "Query Geek News Error")
+		dto.SetGeekErrorResponse(response, false, "03", "Query Geek News Error")
 		return
 	}
 
