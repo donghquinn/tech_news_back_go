@@ -8,4 +8,5 @@ import (
 
 func UserRouter(server *http.ServeMux) {
 	server.HandleFunc("POST /users/login", controllers.LoginController)
+	server.HandleFunc("POST /users/signup", controllers.SignupController)
 }
