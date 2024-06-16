@@ -25,6 +25,7 @@ func SetNetwork() *http.Server {
 	admin.AdminGeekRouter(handler)
 	admin.AdminHackerRouter(handler)
 	admin.AdminMlRouter(handler)
+	admin.MypageRouter(handler)
 
 	server := &http.Server {
 		Handler: handler,
@@ -34,7 +35,7 @@ func SetNetwork() *http.Server {
 	}
 
 	startTime := time.Now()
-	
+
 	message := fmt.Sprintf("Server Start At : %s", startTime)
 	message2 :=  fmt.Sprintf("Listening ON : %s", globalConfig.AppPort)
 	wrapper := strings.Repeat("@", len(message))
