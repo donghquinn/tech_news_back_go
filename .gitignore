@@ -1,5 +1,5 @@
 .DS_Store
-.env
+*.env
 
 redis.conf
 redis_data
