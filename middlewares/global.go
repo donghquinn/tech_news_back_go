@@ -1,33 +1,28 @@
 package middlewares
 
 import (
-	"log"
 	"net/http"
 	"os"
-	"time"
 
-	"github.com/gin-gonic/gin"
+	dto "github.com/dongquinn/tech_news_back_go/dto/middleware"
 )
 
-func GlobalMiddleware() gin.HandlerFunc {
-	return func (ctx *gin.Context)  {
-		start := time.Now()
-		
-		secretKey := os.Getenv("AUTH_KEY")
+func GlobalMiddleware(next http.Handler) http.Handler{
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		authKey := os.Getenv("AUTH_KEY")
 
-		log.Printf("Received Request: %s", start.String())
+		headerKey := r.Header.Get("key")
 
-		headerKey := ctx.Request.Header.Get("key")
-
-		log.Printf("Check Header Key: %s\nServer Key: %s\nStart Validate with Secret Key", headerKey, secretKey)
-
-		// Header Key Matching
-		if headerKey != secretKey {
-			ctx.JSON(
-				http.StatusBadRequest, 
-				gin.H{"message": "Header Key is Not Valid. Please Check and Try Again."})
+		if headerKey == "" {
+			dto.SetMiddlewareErrorResponse(w, false, "00", "No AuthKey Found")
+			return
 		}
 
-		ctx.Next()
-	}
+		if authKey != headerKey {
+			dto.SetMiddlewareErrorResponse(w, false, "00", "AuthKey is Not Valid")
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
 }

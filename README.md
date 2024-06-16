@@ -8,16 +8,10 @@
 
 ## Dependencies
 
-- go-gin
+- crypto
 
 ```shell
-go get -u github.com/gin-gonic/gin
-```
-
-- prisma
-
-```shell
-go get -u github.com/steebchen/prisma-client-go
+go get -u golang.org/x/crypto
 ```
 
 - godotenv
@@ -30,15 +24,6 @@ go get -u github.com/joho/godotenv
 
 ```shell
 go get -u github.com/redis/go-redis/v9
-```
-
-## Prisma
-
-- Data Entities are defined at prisma/schema.prisma
-- Can generate and activate prisma by the command below
-
-```shell
-go run github.com/steebchen/prisma-client-go generate
 ```
 
 ## Mod Dependencies
