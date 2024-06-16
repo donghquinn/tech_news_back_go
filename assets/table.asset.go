@@ -29,7 +29,7 @@ var CreateLikedNews = `
 		platform 	ENUM("HACKERS","GEEK","ML") NOT NULL,
 		created 	TIMESTAMP DEFAULT NOW()
 		
-		CONSTRAINT hacker_liked_idx UNIQUE (user_uuid, platform)
+		CONSTRAINT news_liked_idx UNIQUE (user_uuid, platform)
 	)
 `
 
