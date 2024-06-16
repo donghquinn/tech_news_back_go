@@ -6,6 +6,6 @@ import (
 	controllers "github.com/dongquinn/tech_news_back_go/controllers/admin/news"
 )
 
-func GeekRouter(server *http.ServeMux) {
+func AdminGeekRouter(server *http.ServeMux) {
 	server.HandleFunc("POST /geek/news", controllers.GeekNewsController)
 }

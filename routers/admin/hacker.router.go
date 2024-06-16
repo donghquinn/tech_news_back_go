@@ -6,7 +6,7 @@ import (
 	controllers "github.com/dongquinn/tech_news_back_go/controllers/admin/news"
 )
 
-func HackerRouter(server *http.ServeMux) {
+func AdminHackerRouter(server *http.ServeMux) {
 	server.HandleFunc("POST /admin/hacker/news", controllers.HackerNewsController)
 
 }

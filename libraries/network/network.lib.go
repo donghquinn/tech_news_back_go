@@ -9,6 +9,7 @@ import (
 
 	"github.com/dongquinn/tech_news_back_go/configs"
 	"github.com/dongquinn/tech_news_back_go/routers"
+	admin "github.com/dongquinn/tech_news_back_go/routers/admin"
 )
 
 
@@ -20,6 +21,10 @@ func SetNetwork() *http.Server {
 	routers.GeekRouter(handler)
 	routers.HackerRouter(handler)
 	routers.MlRouter(handler)
+
+	admin.AdminGeekRouter(handler)
+	admin.AdminHackerRouter(handler)
+	admin.AdminMlRouter(handler)
 
 	server := &http.Server {
 		Handler: handler,
