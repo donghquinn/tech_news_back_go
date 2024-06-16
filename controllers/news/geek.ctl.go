@@ -1,4 +1,4 @@
-package newscontrollers
+package controllers
 
 import (
 	"log"

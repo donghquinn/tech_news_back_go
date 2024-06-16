@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/donghquinn/tech_news_back_go/configs"
-	"github.com/donghquinn/tech_news_back_go/types"
+	"github.com/dongquinn/tech_news_back_go/configs"
+	"github.com/dongquinn/tech_news_back_go/types"
 	"github.com/golang-jwt/jwt/v5"
 )
 
