@@ -5,7 +5,5 @@ var InsertNewUser = `
 	SET
 		email = $1,
 		name = $2,
-		password = $3,
-		password_token = $4
+		password = $3
 `
-

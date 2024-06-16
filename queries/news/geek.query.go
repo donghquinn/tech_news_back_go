@@ -20,9 +20,9 @@ var GetGeekNewsByDate = `
 	`
 
 var LikeGeekNews = `
-	INSERT INTO Hacker_Liked
+	INSERT INTO liked_news
 	SET
 		userUuid = $1,
 		postUuid = $2,
-		newsPlatform = "GEEK"
+		platform = "GEEK"
 `

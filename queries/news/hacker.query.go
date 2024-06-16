@@ -19,9 +19,9 @@ var GetHackerByDate =  `
 	`
 
 var LikeHackerNews = `
-	INSERT INTO Hacker_Liked
+	INSERT INTO liked_news
 	SET
-		userUuid = $1,
-		postUuid = $2,
-		newsPlatform = "HACKERS"
+		user_uuid = $1,
+		post_uuid = $2,
+		platform = "HACKERS"
 `
