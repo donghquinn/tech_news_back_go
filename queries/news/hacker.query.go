@@ -1,5 +1,14 @@
 package queries
 
+var GetTodayHackerByDate =  `
+	SELECT *
+	FROM Hackers
+	WHERE DATE(founded) = $1
+	OFFSET $2
+	LIMIT $3
+	ORDER BY rank DESC
+	`
+
 var GetHackerByDate =  `
 	SELECT *
 	FROM Hackers
