@@ -7,6 +7,6 @@ import (
 )
 
 func AdminHackerRouter(server *http.ServeMux) {
-	server.HandleFunc("POST /admin/hacker/news", controllers.HackerNewsController)
+	server.HandleFunc("POST /admin/hacker/news", controllers.AdminHackerNewsController)
 
 }

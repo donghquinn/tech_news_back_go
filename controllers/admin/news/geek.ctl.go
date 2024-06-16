@@ -10,7 +10,7 @@ import (
 	"github.com/dongquinn/tech_news_back_go/utilities"
 )
 
-func GeekNewsController(response http.ResponseWriter, request *http.Request) {
+func AdminGeekNewsController(response http.ResponseWriter, request *http.Request) {
 	_, _, _, err := auth.ValidateJwtToken(request)
 
 	if err != nil {

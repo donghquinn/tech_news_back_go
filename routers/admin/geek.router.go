@@ -7,5 +7,5 @@ import (
 )
 
 func AdminGeekRouter(server *http.ServeMux) {
-	server.HandleFunc("POST /geek/news", controllers.GeekNewsController)
+	server.HandleFunc("POST /geek/news", controllers.AdminGeekNewsController)
 }

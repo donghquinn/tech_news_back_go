@@ -7,5 +7,5 @@ import (
 )
 
 func AdminMlRouter(server *http.ServeMux) {
-	server.HandleFunc("POST /admin/ml/latest", controllers.MachineLearningController)
+	server.HandleFunc("POST /admin/ml/latest", controllers.AdminMachineLearningController)
 }
