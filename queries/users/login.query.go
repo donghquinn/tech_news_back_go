@@ -1,7 +1,6 @@
 package queries
 
 
-
 var GetUserData = `
 	SELECT *
 	FROM Client
