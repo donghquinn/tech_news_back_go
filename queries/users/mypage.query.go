@@ -9,7 +9,6 @@ var GetLikedHackerNewsByUserId  = `
 	ORDER BY h.founded DESC
 `
 
-
 var GetLikedMlNewsByUserId  = `
 	SELECT h.*
 	FROM Ml_Liked ml
@@ -17,7 +16,6 @@ var GetLikedMlNewsByUserId  = `
 	WHERE ml.userUuid = $1
 	ORDER BY m.founded DESC
 `
-
 
 var GetLikedGeekNewsByUserId  = `
 	SELECT h.*
