@@ -1,12 +1,13 @@
 package handlers
 
 import (
+	"net/http"
+
 	newscontrollers "github.com/dongquinn/tech_news_back_go/controllers/news-controllers"
 	userscontrollers "github.com/dongquinn/tech_news_back_go/controllers/users-controllers"
-	"github.com/gin-gonic/gin"
 )
 
-func Handler(router *gin.Engine) {
+func Handler(server *http.ServeMux) {
 	hacker := router.Group("/hacker")
 	{
 		hacker.POST("/news", newscontrollers.HackerNewsController)

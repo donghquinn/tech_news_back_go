@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GeekNewsController(ctx *gin.Context) {
+func GeekNewsController(res http.ResponseWriter, req *http.Request) {
 	request := types.GeekNewsRequest{}
 
 	if reqErr := ctx.ShouldBind(&request); reqErr != nil {

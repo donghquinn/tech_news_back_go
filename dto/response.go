@@ -4,10 +4,9 @@ import (
 	"net/http"
 
 	"github.com/dongquinn/tech_news_back_go/types"
-	"github.com/gin-gonic/gin"
 )
 
-func SetResponse(resCode int, data any, ctx *gin.Context) {
+func SetResponse(response http.ResponseWriter, result bool, code string) {
 	result := types.ResponseResult {
 		Result: data,
 	}

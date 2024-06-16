@@ -1,25 +1,25 @@
 package middlewares
 
 import (
-	"fmt"
-
-	"github.com/gin-gonic/gin"
+	"log"
+	"net/http"
 )
 
-func CorsMiddlewares() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-		c.Writer.Header().Set("Access-Control-Max-Age", "86400")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, Origin, key")
-		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+func CorsMiddlewares(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+		res.Header().Set("Access-Control-Allow-Origin", "*")
+		res.Header().Set("Access-Control-Max-Age", "86400")
+		res.Header().Set("Access-Control-Allow-Methods", "POST, GET")
+		res.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		res.Header().Set("Access-Control-Allow-Credentials", "true")
 
-		if c.Request.Method == "OPTIONS" {
-			fmt.Println("OPTIONS")
-			c.AbortWithStatus(204)
+		if req.Method == "OPTIONS" {
+			log.Printf("Method Options")
 
+			res.WriteHeader(http.StatusOK)
 			return
 		}
-		c.Next()
-	}
+		
+		next.ServeHTTP(res, req)
+	})
 }
