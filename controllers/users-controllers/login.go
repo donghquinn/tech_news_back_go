@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// TODO Redis로 로그인 중복 요청 체크
 func UserLoginController(ctx *gin.Context) {
 	request := types.LoginRequest{}
 
