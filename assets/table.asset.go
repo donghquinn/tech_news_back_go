@@ -21,6 +21,17 @@ var CreateClient = `
 	)
 `
 
+var CreateSession = `
+	CREATE TABLE IF NOT EXISTS session (
+		session_id		UUID 			NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+		user_id 		VARCHAR(50) 	NOT NULL,
+		user_ip			VARCHAR(50),
+		created 		TIMESTAMP 		NOT NULL DEFAULT NOW(),
+
+		CONSTRAINT session_idx UNIQUE (user_id)
+	);
+`
+
 var CreateLikedNews = `
 	RAETE TABLE IF NOT EXISTS liked_news (
 		hl_seq	SERIAL	NOT NULL PRIMARY KEY,
