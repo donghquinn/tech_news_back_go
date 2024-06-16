@@ -33,6 +33,18 @@ var CreateLikedNews = `
 	)
 `
 
+var CreateHackerNews = `
+	CRAETE TABLE IF NOT EXISTS Hackers (
+		uuid	UUID			NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+		user_uuid	VARCHAR(50) NOT NULL,
+		post_uuid	VARCHAR(50) NOT NULL,
+		platform 	ENUM("HACKERS","GEEK","ML") NOT NULL,
+		created 	TIMESTAMP DEFAULT NOW()
+		
+		CONSTRAINT news_liked_idx UNIQUE (user_uuid, platform)
+	)
+`
+
 
 var QueriesTransaction = []string{
 	UserExternalUuidFunctions, CreateClient, CreateLikedNews}
