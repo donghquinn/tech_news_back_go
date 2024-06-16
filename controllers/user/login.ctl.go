@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	dto "github.com/dongquinn/tech_news_back_go/dto/user"
+	"github.com/dongquinn/tech_news_back_go/libraries/user"
 	types "github.com/dongquinn/tech_news_back_go/types/user"
 	"github.com/dongquinn/tech_news_back_go/utilities"
 )
@@ -18,5 +19,5 @@ func LoginController(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	
+	user.GetLoginUserData(loginRequest.Email)
 }

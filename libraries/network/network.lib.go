@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/dongquinn/tech_news_back_go/configs"
-	"github.com/dongquinn/tech_news_back_go/handlers"
+	"github.com/dongquinn/tech_news_back_go/routers"
 )
 
 
@@ -17,7 +17,9 @@ func SetNetwork() *http.Server {
 
 	handler := http.NewServeMux()
 
-	handlers.Handler(handler)
+	routers.GeekRouter(handler)
+	routers.HackerRouter(handler)
+	routers.MlRouter(handler)
 
 	server := &http.Server {
 		Handler: handler,

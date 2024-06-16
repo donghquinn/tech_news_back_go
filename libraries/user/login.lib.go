@@ -31,3 +31,4 @@ func GetLoginUserData(email string) (types.LoginUserQueryResult, error){
 
 	return loginData, nil
 }
+
