@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/dongquinn/tech_news_back_go/configs"
+	"github.com/dongquinn/tech_news_back_go/middlewares"
 	"github.com/dongquinn/tech_news_back_go/routers"
 	admin "github.com/dongquinn/tech_news_back_go/routers/admin"
 )
@@ -18,6 +19,8 @@ func SetNetwork() *http.Server {
 
 	handler := http.NewServeMux()
 
+	corsHandler := middlewares.CorsMiddlewares(handler)
+	middlewareHandler := middlewares.GlobalMiddleware(corsHandler)
 	routers.GeekRouter(handler)
 	routers.HackerRouter(handler)
 	routers.MlRouter(handler)
@@ -28,7 +31,7 @@ func SetNetwork() *http.Server {
 	admin.MypageRouter(handler)
 
 	server := &http.Server {
-		Handler: handler,
+		Handler: middlewareHandler,
 		Addr: globalConfig.AppPort,
 		WriteTimeout: time.Second * 30,
 		ReadTimeout: time.Second * 30,

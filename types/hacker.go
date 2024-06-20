@@ -3,12 +3,12 @@ package types
 import "time"
 
 type HackerNewsRequest struct {
-	Today string `json:"today" xml:"today" binding:"required"`
+	Today string `json:"today"`
 }
 
 type HackerNewsResponse struct {
-	Uuid string `json:"uuid" xml:"uuid" binding:"required,min=1"`
-	Post string `json:"post" xml:"post" binding:"required,min=1"`
-	Link string `json:"link" xml:"link" binding:"required,min=1"`
-	Founded time.Time `json:"founded" xml:"founded" binding:"required"`
+	Uuid string `json:"uuid"`
+	Post string `json:"post"`
+	Link string `json:"link"`
+	Founded time.Time `json:"founded"`
 }
