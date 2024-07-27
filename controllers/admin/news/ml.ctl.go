@@ -30,7 +30,7 @@ func AdminMachineLearningController(response http.ResponseWriter, request *http.
 	page := request.URL.Query().Get("page")
 	size := request.URL.Query().Get("size")
 
-	mlNewsList, mlErr := news.GetTodayMlNewsList(page, size)
+	mlNewsList, mlErr := news.GetTodayMlNewsList(requestBody.Today, page, size)
 
 	if mlErr != nil {
 		dto.SetMlErrorResponse(response, false, "03", "Get ML News Error")

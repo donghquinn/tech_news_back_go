@@ -22,7 +22,7 @@ func HackerNewsController(response http.ResponseWriter, request *http.Request){
 	page := request.URL.Query().Get("page")
 	size := request.URL.Query().Get("size")
 
-	newsList, newsErr := news.GetTodayHackerNewsList(page, size)
+	newsList, newsErr := news.GetTodayHackerNewsList(requestBody.Today, page, size)
 
 	if newsErr != nil {
 		dto.SetHackerErrorResponse(response, false, "02", "Query News Error")

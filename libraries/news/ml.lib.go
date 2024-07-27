@@ -11,8 +11,12 @@ import (
 	"github.com/dongquinn/tech_news_back_go/types"
 )
 
-func GetTodayMlNewsList(page string, size string) ([]types.MachineLEarningNewsResponse, error) {
-	todayDate := time.Now()
+func GetTodayMlNewsList(receivedToday string,page string, size string) ([]types.MachineLEarningNewsResponse, error) {
+	todayDate, parseErr := time.Parse("2006-01-02", receivedToday)
+
+	if parseErr != nil {
+		return []types.MachineLEarningNewsResponse{}, parseErr
+	}
 
 	today := fmt.Sprintf("%d-%d-%d",
 		todayDate.Year(),
