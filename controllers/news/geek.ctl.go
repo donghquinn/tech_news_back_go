@@ -23,7 +23,7 @@ func GeekNewsController(response http.ResponseWriter, request *http.Request) {
 	size := request.URL.Query().Get("size")
 
 
-	geekNewsList, geekErr := news.GetTodayGeekNewsList(page, size)
+	geekNewsList, geekErr := news.GetTodayGeekNewsList(requestBody.Today, page, size)
 
 	if geekErr != nil {
 		dto.SetGeekErrorResponse(response, false, "02", "Query Geek News Error")

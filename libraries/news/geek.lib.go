@@ -11,9 +11,13 @@ import (
 	"github.com/dongquinn/tech_news_back_go/types"
 )
 
-func GetTodayGeekNewsList(page string, size string) ([]types.GeekNewsResponse, error) {
-	todayDate := time.Now()
+func GetTodayGeekNewsList(receivedToday string,page string, size string) ([]types.GeekNewsResponse, error) {
+	todayDate, parseErr := time.Parse("2006-01-02", receivedToday)
 
+	if parseErr != nil {
+		return []types.GeekNewsResponse{}, parseErr
+	}
+	
 	today := fmt.Sprintf("%d-%d-%d",
 		todayDate.Year(),
 		todayDate.Month(),

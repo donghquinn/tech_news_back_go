@@ -22,7 +22,7 @@ func MachineLearningController(response http.ResponseWriter, request *http.Reque
 	page := request.URL.Query().Get("page")
 	size := request.URL.Query().Get("size")
 
-	mlNewsList, mlErr := news.GetTodayMlNewsList(page, size)
+	mlNewsList, mlErr := news.GetTodayMlNewsList(requestBody.Today, page, size)
 
 	if mlErr != nil {
 		dto.SetMlErrorResponse(response, false, "02", "Get ML News Error")
