@@ -27,10 +27,6 @@ type LoginRedisStruct struct {
 type LoginUserQueryResult struct {
 	Uuid string `json:"uuid"`
 	Email string `json:"email"`
-	Name string `json:"name"`
 	Password string `json:"password"`
-	PasswordToken string `json:"passwordToken"`
-	IsLogined bool `json:"isLogined"`
-	SignedIn string `json:"signedIn"`
-	Logined string `json:"logined"`
+	UserStatus string `json:"userStatus"`
 }

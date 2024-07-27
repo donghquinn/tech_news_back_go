@@ -6,7 +6,7 @@ import "github.com/dongquinn/tech_news_back_go/types"
 type MlNewsResponseType struct {
 	Result bool `json:"result"`
 	Code string `json:"code"`
-	News []types.MachineLEarningNewsResponse
+	News []types.MachineLEarningNewsResponse	`json:"news"`
 }
 
 type MlNewsErrorResponseType struct {

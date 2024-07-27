@@ -17,35 +17,77 @@ var CreateClient = `
 		signed_in	timestamp NOT NULL DEFAULT NOW(),
 		logined		timestamp,
 
-		CONSTRAINT user_idx UNIQUE (user_status)
+		CONSTRAINT user_idx (user_status)
 	)
 `
 
-var CreateLikedNews = `
-	RAETE TABLE IF NOT EXISTS liked_news (
+var CreateSession = `
+	CREATE TABLE IF NOT EXISTS session (
+		session_id		UUID 			NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+		user_id 		VARCHAR(50) 	NOT NULL,
+		user_ip			VARCHAR(50),
+		created 		TIMESTAMP 		NOT NULL DEFAULT NOW(),
+
+		CONSTRAINT session_idx (user_id)
+	);
+`
+
+var CreateLikedGeekNews = `
+	RAETE TABLE IF NOT EXISTS Geek_Liked (
 		hl_seq	SERIAL	NOT NULL PRIMARY KEY,
 		user_uuid	VARCHAR(50) NOT NULL,
 		post_uuid	VARCHAR(50) NOT NULL,
 		platform 	ENUM("HACKERS","GEEK","ML") NOT NULL,
 		created 	TIMESTAMP DEFAULT NOW()
 		
-		CONSTRAINT news_liked_idx UNIQUE (user_uuid, platform)
+		CONSTRAINT news_liked_idx (user_uuid, platform)
 	)
 `
 
-var CreateHackerNews = `
-	CRAETE TABLE IF NOT EXISTS Hackers (
-		uuid	UUID			NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+var CreateLikedHackerNews = `
+	RAETE TABLE IF NOT EXISTS Hacker_Liked (
+		hl_seq	SERIAL	NOT NULL PRIMARY KEY,
 		user_uuid	VARCHAR(50) NOT NULL,
 		post_uuid	VARCHAR(50) NOT NULL,
 		platform 	ENUM("HACKERS","GEEK","ML") NOT NULL,
 		created 	TIMESTAMP DEFAULT NOW()
 		
-		CONSTRAINT news_liked_idx UNIQUE (user_uuid, platform)
+		CONSTRAINT news_liked_idx (user_uuid, platform)
 	)
 `
 
+var CreateHackerNews = `
+	CRAETE TABLE IF NOT EXISTS Hackers (
+		uuid		UUID			NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+		rank		TINYINT(2)		NOT NULL,
+		post		TEXT			NOT NULL,
+		link		TEXT			NOT NULL,
+		founded 	TIMESTAMP		DEFAULT NOW()
+	)
+`
+
+var CreateGeekNews = `
+	CRAETE TABLE IF NOT EXISTS Geek (
+		uuid		UUID			NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+		page		VARCHAR(10)		NOT NULL,
+		rank		TINYINT(2)		NOT NULL,
+		post		TEXT			NOT NULL,
+		descLink	TEXT			NOT NULL,
+		link		TEXT			NOT NULL,
+		founded 	TIMESTAMP		DEFAULT NOW()
+	)
+`
+
+var CreateMachineNews = `
+	CRAETE TABLE IF NOT EXISTS MachineNews (
+		uuid		UUID			NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+		category	VARCHAR(10)		NOT NULL,
+		title		TEXT			NOT NULL,
+		link		TEXT			NOT NULL,
+		founded 	TIMESTAMP		DEFAULT NOW()
+	)
+`
 
 var QueriesTransaction = []string{
-	UserExternalUuidFunctions, CreateClient, CreateLikedNews}
+	UserExternalUuidFunctions, CreateClient, CreateLikedHackerNews}
 	//  CreateSession, ChatGen, ImageGen, CreateFile}

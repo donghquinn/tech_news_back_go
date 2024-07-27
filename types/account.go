@@ -1,20 +1,20 @@
 package types
 
 type SignupRequest struct {
-	Email string `json:"email" xml:"email" binding:"min=5,required"`
-	Name string `json:"name" xml:"name" binding:"min=2,required"`
-	Password string `json:"password" xml:"password" binding:"min=5,max=15,required"`
+	Email string `json:"email"`
+	Name string `json:"name"`
+	Password string `json:"password"`
 }
 
 type LoginRequest struct {
-	Email string `json:"email" xml:"email" binding:"min=5,required"`
-	Password string `json:"password" xml:"password" binding:"min=5,max=15,required"`
+	Email string `json:"email"`
+	Password string `json:"password"`
 }
 
 type LogoutRequest struct {
-	Uuid string `json:"uuid" xml:"uuid" binding:"min=8,required"`
+	Uuid string `json:"uuid"`
 }
 
 type AccountItem struct {
-	Uuid string `json:"uuid" binding:"required"`
+	Uuid string `json:"uuid"`
 }

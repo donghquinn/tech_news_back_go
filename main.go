@@ -13,5 +13,6 @@ func main(){
 
 	server := network.SetNetwork()
 
+	server.ListenAndServe()
 	utilities.GracefulShutDown(server)
 }

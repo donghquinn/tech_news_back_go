@@ -8,6 +8,7 @@ import (
 	"github.com/dongquinn/tech_news_back_go/libraries/user"
 )
 
+// TODO  라우터 분리 - 뉴스별로
 func MyPageController(response http.ResponseWriter, request *http.Request) {
 	userId, email, _, err := auth.ValidateJwtToken(request)
 
