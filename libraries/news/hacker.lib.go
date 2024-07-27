@@ -12,16 +12,14 @@ import (
 )
 
 func GetTodayHackerNewsList(receivedToday string,page string, size string) ([]types.HackerNewsResponse, error) {
-	todayDate, parseErr := time.Parse("2006-01-02", receivedToday)
+	todayDate, parseErr := time.Parse("2006-01-02 15:04:05.000", receivedToday)
 
 	if parseErr != nil {
+		log.Printf("Parse Error: %v", parseErr)
 		return []types.HackerNewsResponse{}, parseErr
 	}
-	
-	today := fmt.Sprintf("%d-%d-%d",
-		todayDate.Year(),
-		todayDate.Month(),
-		todayDate.Day())
+
+	today := todayDate.Format("2006-01-02 15:04:05")
 
 	dbCon, dbErr := database.InitPostgres()
 
@@ -49,7 +47,12 @@ func GetTodayHackerNewsList(receivedToday string,page string, size string) ([]ty
 	for queryResult.Next() {
 		row := types.HackerNewsResponse{}
 
-		scanErr := queryResult.Scan(&row)
+		scanErr := queryResult.Scan(
+			&row.Uuid, 
+			&row.Rank, 
+			&row.Post, 
+			&row.Link, 
+			&row.Founded)
 
 		if scanErr != nil {
 			log.Printf("[Hacker] Get Today Hacker News: %v", scanErr)
