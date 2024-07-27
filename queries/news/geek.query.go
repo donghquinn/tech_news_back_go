@@ -1,7 +1,7 @@
 package queries
 
 var GetGeekTodayNewsByDate = `
-	SELECT *
+	SELECT uuid, post, descLink, link AS originalLink, founded
 	FROM "Geek" g
 	WHERE DATE(founded) = $1
 	ORDER BY rank DESC
@@ -11,7 +11,7 @@ var GetGeekTodayNewsByDate = `
 
 
 var GetGeekNewsByDate = `
-	SELECT *
+	SELECT uuid, post, descLink, link AS originalLink, founded
 	FROM "Geek" g
 	WHERE founded IS BETWEEN $1 AND $2
 	ORDER BY rank DESC

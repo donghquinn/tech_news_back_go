@@ -12,16 +12,14 @@ import (
 )
 
 func GetTodayMlNewsList(receivedToday string,page string, size string) ([]types.MachineLEarningNewsResponse, error) {
-	todayDate, parseErr := time.Parse("2006-01-02", receivedToday)
+	todayDate, parseErr := time.Parse("2006-01-02 15:04:05.000", receivedToday)
 
 	if parseErr != nil {
+		log.Printf("Parse Error: %v", parseErr)
 		return []types.MachineLEarningNewsResponse{}, parseErr
 	}
 
-	today := fmt.Sprintf("%d-%d-%d",
-		todayDate.Year(),
-		todayDate.Month(),
-		todayDate.Day())
+	today := todayDate.Format("2006-01-02 15:04:05")
 
 	dbCon, dbErr := database.InitPostgres()
 
@@ -36,7 +34,7 @@ func GetTodayMlNewsList(receivedToday string,page string, size string) ([]types.
 		return []types.MachineLEarningNewsResponse{}, convErr
 	}
 
-	queryResult, queryErr := database.Query(dbCon, queries.GetGeekTodayNewsByDate, today, fmt.Sprintf("%d", pageInt - 1), size)
+	queryResult, queryErr := database.Query(dbCon, queries.GetTodayMlByDate, today, fmt.Sprintf("%d", pageInt - 1), size)
 
 	if queryErr != nil {
 		return []types.MachineLEarningNewsResponse{}, queryErr
@@ -49,7 +47,12 @@ func GetTodayMlNewsList(receivedToday string,page string, size string) ([]types.
 	for queryResult.Next() {
 		row := types.MachineLEarningNewsResponse{}
 
-		scanErr := queryResult.Scan(&row)
+		scanErr := queryResult.Scan(
+			&row.Uuid,
+			&row.Category,
+			&row.Title,
+			&row.Link,
+			&row.Founded)
 
 		if scanErr != nil {
 			log.Printf("[ML] Get Today Hacker News: %v", scanErr)

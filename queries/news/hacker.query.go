@@ -1,7 +1,7 @@
 package queries
 
 var GetTodayHackerByDate =  `
-	SELECT *
+	SELECT uuid, rank, post, link, founded
 	FROM "Hackers" h
 	WHERE DATE(founded) = $1
 	ORDER BY rank DESC
@@ -10,7 +10,7 @@ var GetTodayHackerByDate =  `
 `
 
 var GetHackerByDate =  `
-	SELECT *
+	SELECT uuid, rank, post, link, founded
 	FROM "Hackers" h
 	WHERE founded IS BETWEEN $1 AND $2
 	ORDER BY rank DESC

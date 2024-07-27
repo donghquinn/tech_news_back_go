@@ -2,7 +2,7 @@ package queries
 
 
 var GetTodayMlByDate =  `
-	SELECT *
+	SELECT uuid, category, title, link, founded
 	FROM "MachineNews" m
 	WHERE DATE(founded) = $1
 	ORDER BY founded DESC
@@ -11,7 +11,7 @@ var GetTodayMlByDate =  `
 `
 
 var GetMlByDate =  `
-	SELECT *
+	SELECT uuid, category, title, link, founded
 	FROM "MachineNews" m
 	WHERE founded IS BETWEEN $1 AND $2
 	ORDER BY founded DESC
