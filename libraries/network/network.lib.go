@@ -40,7 +40,15 @@ func SetNetwork() *http.Server {
 
 	startTime := time.Now()
 
-	message := fmt.Sprintf("Server Start At : %s", startTime)
+	startTimeFormat := fmt.Sprintf("%d-%d-%d %d:%d:%d\n",
+		startTime.Year(),
+		startTime.Month(),
+		startTime.Day(),
+		startTime.Hour(),
+		startTime.Hour(),
+		startTime.Second())
+
+	message := fmt.Sprintf("Server Start At : %s", startTimeFormat)
 	message2 :=  fmt.Sprintf("Listening ON : %s", globalConfig.AppPort)
 	wrapper := strings.Repeat("@", len(message))
 

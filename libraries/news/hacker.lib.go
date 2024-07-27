@@ -14,6 +14,11 @@ import (
 func GetTodayHackerNewsList(page string, size string) ([]types.HackerNewsResponse, error) {
 	todayDate := time.Now()
 
+	today := fmt.Sprintf("%d-%d-%d",
+		todayDate.Year(),
+		todayDate.Month(),
+		todayDate.Day())
+
 	dbCon, dbErr := database.InitPostgres()
 
 	if dbErr != nil {
@@ -27,7 +32,7 @@ func GetTodayHackerNewsList(page string, size string) ([]types.HackerNewsRespons
 		return []types.HackerNewsResponse{}, convErr
 	}
 
-	queryResult, queryErr := database.Query(dbCon, queries.GetTodayHackerByDate, fmt.Sprintf("%s", todayDate), fmt.Sprintf("%d", pageInt - 1), size)
+	queryResult, queryErr := database.Query(dbCon, queries.GetTodayHackerByDate, today, fmt.Sprintf("%d", pageInt - 1), size)
 
 	if queryErr != nil {
 		return []types.HackerNewsResponse{}, queryErr
