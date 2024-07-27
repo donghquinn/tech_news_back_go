@@ -3,7 +3,7 @@ package queries
 
 var GetTodayMlByDate =  `
 	SELECT *
-	FROM MachineNews
+	FROM "MachineNews" m
 	WHERE DATE(founded) = $1
 	ORDER BY founded DESC
 	OFFSET $2
@@ -12,7 +12,7 @@ var GetTodayMlByDate =  `
 
 var GetMlByDate =  `
 	SELECT *
-	FROM MachineNews
+	FROM "MachineNews" m
 	WHERE founded IS BETWEEN $1 AND $2
 	ORDER BY founded DESC
 	OFFSET $3

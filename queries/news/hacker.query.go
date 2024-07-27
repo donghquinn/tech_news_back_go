@@ -2,7 +2,7 @@ package queries
 
 var GetTodayHackerByDate =  `
 	SELECT *
-	FROM Hackers
+	FROM "Hackers" h
 	WHERE DATE(founded) = $1
 	ORDER BY rank DESC
 	OFFSET $2
@@ -11,7 +11,7 @@ var GetTodayHackerByDate =  `
 
 var GetHackerByDate =  `
 	SELECT *
-	FROM Hackers
+	FROM "Hackers" h
 	WHERE founded IS BETWEEN $1 AND $2
 	ORDER BY rank DESC
 	OFFSET $3
