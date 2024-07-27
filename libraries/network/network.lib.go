@@ -21,6 +21,7 @@ func SetNetwork() *http.Server {
 
 	corsHandler := middlewares.CorsMiddlewares(handler)
 	middlewareHandler := middlewares.GlobalMiddleware(corsHandler)
+	
 	routers.GeekRouter(handler)
 	routers.HackerRouter(handler)
 	routers.MlRouter(handler)
