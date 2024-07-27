@@ -17,15 +17,16 @@ services:
   backend:
     depends_on:
       - redis
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ${IMAGE_URL}
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     container_name: news_miner
     restart: unless-stopped
     # ports:
     #   - 5500:5500
     expose: 
-      - 5500
+      - 8694
     env_file:
       - .env
     networks:

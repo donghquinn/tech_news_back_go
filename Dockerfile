@@ -11,8 +11,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN go run github.com/steebchen/prisma-client-go generate
-
 RUN go build -o scraper .
 
 
