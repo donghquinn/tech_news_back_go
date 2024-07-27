@@ -14,6 +14,11 @@ import (
 func GetTodayMlNewsList(page string, size string) ([]types.MachineLEarningNewsResponse, error) {
 	todayDate := time.Now()
 
+	today := fmt.Sprintf("%d-%d-%d",
+		todayDate.Year(),
+		todayDate.Month(),
+		todayDate.Day())
+
 	dbCon, dbErr := database.InitPostgres()
 
 	if dbErr != nil {
@@ -27,7 +32,7 @@ func GetTodayMlNewsList(page string, size string) ([]types.MachineLEarningNewsRe
 		return []types.MachineLEarningNewsResponse{}, convErr
 	}
 
-	queryResult, queryErr := database.Query(dbCon, queries.GetGeekTodayNewsByDate, fmt.Sprintf("%s", todayDate), fmt.Sprintf("%d", pageInt - 1), size)
+	queryResult, queryErr := database.Query(dbCon, queries.GetGeekTodayNewsByDate, today, fmt.Sprintf("%d", pageInt - 1), size)
 
 	if queryErr != nil {
 		return []types.MachineLEarningNewsResponse{}, queryErr
