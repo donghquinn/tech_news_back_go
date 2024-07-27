@@ -2,7 +2,7 @@ package queries
 
 var GetGeekTodayNewsByDate = `
 	SELECT *
-	FROM Geek
+	FROM "Geek" g
 	WHERE DATE(founded) = $1
 	ORDER BY rank DESC
 	OFFSET $2
@@ -12,7 +12,7 @@ var GetGeekTodayNewsByDate = `
 
 var GetGeekNewsByDate = `
 	SELECT *
-	FROM Geek
+	FROM "Geek" g
 	WHERE founded IS BETWEEN $1 AND $2
 	ORDER BY rank DESC
 	OFFSET $3
